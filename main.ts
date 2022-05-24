@@ -17,10 +17,12 @@ function Open_Lock () {
     Lock = 0
 }
 input.onLogoEvent(TouchButtonEvent.LongPressed, function () {
-	
+    Game_Screen_var = 1
 })
 function StarFlix () {
-    while (Game_Screen_var == 2) {
+    Game_Screen_var = 0
+    Sf = 1
+    while (Sf == 1) {
         basic.showLeds(`
             . . . . .
             . . . . .
@@ -136,9 +138,9 @@ function StarFlix () {
     }
 }
 input.onButtonPressed(Button.AB, function () {
-    Game_run_clicm = 1
-    click = 0
     if (Game_Screen_var == 1) {
+        Game_run_clicm = 1
+        click = 0
         click_game()
     }
     if (Game_Screen_var == 2) {
@@ -166,13 +168,18 @@ input.onGesture(Gesture.Shake, function () {
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
     if (Lock == 1) {
         Open_Lock()
-    } else if (Game_Screen_var < 1) {
-        Game_Screen_var = 0
     } else {
         Game_Screen_var += 1
     }
+    if (Sf == 1) {
+        Sf = 0
+    }
+    if (Game_run_clicm == 1) {
+        Game_run_clicm = 0
+    }
 })
 let Game_run_clicm = 0
+let Sf = 0
 let Lock = 0
 let Game_Screen_var = 0
 let click = 0
@@ -334,5 +341,17 @@ basic.forever(function () {
             . # # . .
             . # . . .
             `)
+    }
+    if (Game_Screen_var == 3) {
+        basic.showLeds(`
+            . # # # .
+            # . # . #
+            # . # . #
+            # . # . #
+            . # # # .
+            `)
+    }
+    if (Game_Screen_var == 5) {
+        Game_Screen_var = 1
     }
 })
