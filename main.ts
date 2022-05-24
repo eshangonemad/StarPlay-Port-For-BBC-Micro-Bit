@@ -19,12 +19,34 @@ function Open_Lock () {
 input.onLogoEvent(TouchButtonEvent.LongPressed, function () {
     Game_Screen_var = 1
 })
+input.onButtonPressed(Button.A, function () {
+    if (cf == 1) {
+        coin = randint(1, 2)
+        if (coin == 1) {
+            basic.showLeds(`
+                # . . . #
+                # . . . #
+                # # # # #
+                # . . . #
+                # . . . #
+                `)
+        } else {
+            basic.showLeds(`
+                # # # # #
+                . . # . .
+                . . # . .
+                . . # . .
+                . . # . .
+                `)
+        }
+    }
+})
 function StarFlix () {
     Game_Screen_var = 0
     Sf = 1
     while (Sf == 1) {
         basic.showLeds(`
-            . . . . .
+            . . . . #
             . . . . .
             . . . . .
             . . . . .
@@ -147,6 +169,9 @@ input.onButtonPressed(Button.AB, function () {
         basic.clearScreen()
         StarFlix()
     }
+    if (Game_Screen_var == 3) {
+        cf = 1
+    }
 })
 function click_game () {
     Game_Screen_var = 0
@@ -177,9 +202,14 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function () {
     if (Game_run_clicm == 1) {
         Game_run_clicm = 0
     }
+    if (cf == 1) {
+        cf = 0
+    }
 })
 let Game_run_clicm = 0
 let Sf = 0
+let coin = 0
+let cf = 0
 let Lock = 0
 let Game_Screen_var = 0
 let click = 0
