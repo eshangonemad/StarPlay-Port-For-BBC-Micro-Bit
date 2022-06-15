@@ -20,33 +20,14 @@ input.onLogoEvent(TouchButtonEvent.LongPressed, function () {
     Game_Screen_var = 1
 })
 input.onButtonPressed(Button.A, function () {
-    if (cf == 1) {
-        coin = randint(1, 2)
-        if (coin == 1) {
-            basic.showLeds(`
-                # . . . #
-                # . . . #
-                # # # # #
-                # . . . #
-                # . . . #
-                `)
-        } else {
-            basic.showLeds(`
-                # # # # #
-                . . # . .
-                . . # . .
-                . . # . .
-                . . # . .
-                `)
-        }
-    }
+	
 })
 function StarFlix () {
     Game_Screen_var = 0
     Sf = 1
     while (Sf == 1) {
         basic.showLeds(`
-            . . . . #
+            . . . . .
             . . . . .
             . . . . .
             . . . . .
@@ -170,7 +151,16 @@ input.onButtonPressed(Button.AB, function () {
         StarFlix()
     }
     if (Game_Screen_var == 3) {
+        basic.clearScreen()
         cf = 1
+        basic.showString("Shake To Flip Coin")
+        basic.showLeds(`
+            # . # . #
+            . # . # .
+            # . # . #
+            . # # # .
+            . # # # .
+            `)
     }
 })
 function click_game () {
@@ -189,6 +179,26 @@ function click_game () {
 }
 input.onGesture(Gesture.Shake, function () {
     click += 1
+    if (cf == 1) {
+        coin = randint(1, 2)
+        if (coin == 1) {
+            basic.showLeds(`
+                # . . . #
+                # . . . #
+                # # # # #
+                # . . . #
+                # . . . #
+                `)
+        } else {
+            basic.showLeds(`
+                # # # # #
+                . . # . .
+                . . # . .
+                . . # . .
+                . . # . .
+                `)
+        }
+    }
 })
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
     if (Lock == 1) {
@@ -206,21 +216,21 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function () {
         cf = 0
     }
 })
-let Game_run_clicm = 0
-let Sf = 0
 let coin = 0
 let cf = 0
+let Game_run_clicm = 0
+let Sf = 0
 let Lock = 0
 let Game_Screen_var = 0
 let click = 0
 music.playMelody("G D F G - - - - ", 120)
 images.createBigImage(`
     . . . . . . . . . .
-    . . # # . . . . # .
-    . # # # # . . # # #
-    # # # # # # . . # .
+    . . . . . . . # . .
+    . . # # . . # # # .
+    . # # # # . . # . .
     # # # # # # . . . .
-    `).scrollImage(1, 300)
+    `).scrollImage(1, 500)
 music.playMelody("G F D F G - - - ", 120)
 basic.clearScreen()
 click = 0
@@ -356,14 +366,19 @@ for (let index = 0; index < 2; index++) {
     basic.clearScreen()
 }
 Lock = 1
-basic.showLeds(`
-    . . # # #
-    . . # . #
-    . . # . #
-    . . # # #
-    . . # # #
-    `)
 basic.forever(function () {
+	
+})
+basic.forever(function () {
+    if (Lock == 1) {
+        basic.showLeds(`
+            . . . . .
+            . . # # #
+            . . # . #
+            . . # # #
+            . . # # #
+            `)
+    }
     if (input.isGesture(Gesture.ScreenDown)) {
         Lock = 1
     }
@@ -394,7 +409,7 @@ basic.forever(function () {
             . # # # .
             `)
     }
-    if (Game_Screen_var == 5) {
+    if (Game_Screen_var == 4) {
         Game_Screen_var = 1
     }
 })
