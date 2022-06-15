@@ -213,6 +213,16 @@ let cf = 0
 let Lock = 0
 let Game_Screen_var = 0
 let click = 0
+music.playMelody("G D F G - - - - ", 120)
+images.createBigImage(`
+    . . . . . . . . . .
+    . . # # . . . . # .
+    . # # # # . . # # #
+    # # # # # # . . # .
+    # # # # # # . . . .
+    `).scrollImage(1, 300)
+music.playMelody("G F D F G - - - ", 120)
+basic.clearScreen()
 click = 0
 Game_Screen_var = 0
 for (let index = 0; index < 2; index++) {
@@ -354,6 +364,9 @@ basic.showLeds(`
     . . # # #
     `)
 basic.forever(function () {
+    if (input.isGesture(Gesture.ScreenDown)) {
+        Lock = 1
+    }
     if (Game_Screen_var == 1) {
         basic.showLeds(`
             . . . . .
